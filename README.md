@@ -16,7 +16,6 @@ Digger runs terraform natively in your CI. This is:
 - Scalable compute with jobs isolation
 - Role-based access control via OPA
 - Read more about differences with Atlantis in our blog post
-
 ​
 ## Compared to Terraform Cloud and other TACOs
 
