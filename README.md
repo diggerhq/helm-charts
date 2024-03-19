@@ -9,7 +9,30 @@ Digger runs terraform natively in your CI. This is:
 - Secure, because cloud access secrets aren't shared with a third-party
 - Cost-effective, because you are not paying for additional compute just to run your terraform
 
-# Digger backend Helm Chart
+## Differences Compared to Atlantis
+
+- No need to host and maintain a server
+- Secure by design
+- Scalable compute with jobs isolation
+- Role-based access control via OPA
+- Read more about differences with Atlantis in our blog post
+
+​
+## Compared to Terraform Cloud and other TACOs
+
+- Open source
+- No duplication of the CI/CD stack
+- Secrets not shared with a third party
+​
+## Support for other CI’s
+
+We are currently designing Digger to be Multi-CI, so that in addition to GitHub Actions, you can run Terraform/OpenTofu within other CI’s such as Gitlab CI, Azure DevOps, Bitbucket, TeamCity, Circle CI and Jenkins, while still having the option to orchestrate jobs using Digger’s Orchestrator Backend.
+
+Read more in this [blog](https://blog.digger.dev/how-we-are-designing-digger-to-support-multiple-ci-systems/), and please share your requirement on [Slack](https://bit.ly/diggercommunity) if you require support for other CI’s. Your feedback/insight would help us a lot as this feature is in active development.
+
+
+
+# Digger Backend Helm Chart
 
 ## Installation steps
 
