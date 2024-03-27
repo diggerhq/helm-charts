@@ -1,0 +1,26 @@
+**/.DS_Store
+
+# Helm chart dependencies
+charts/*.tgz
+
+# Helm chart packaging output
+*.tgz
+
+# Helm chart lock file
+Chart.lock
+
+# Helm chart release files
+release-*
+
+# Helm chart testing files
+ct.yaml
+test-values.yaml
+
+# Helm chart temporary files
+.tmp-chart*
+
+# Helm chart local configuration files
+values.local.yaml
+
+# Helm chart local secrets files
+secrets.yaml
