@@ -26,7 +26,6 @@ spec:
         startupProbe:
           {{ .Values.digger.startupProbe | toYaml | indent 10 | trim }}
 
-
         envFrom:
         - secretRef:
         {{- if not .Values.digger.secret.useExistingSecret }}
