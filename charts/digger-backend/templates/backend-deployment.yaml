@@ -20,6 +20,13 @@ spec:
         
         ports:
         - containerPort: 3000
+
+        livenessProbe:
+          {{ .Values.digger.livenessProbe | toYaml | indent 10 | trim }}
+        startupProbe:
+          {{ .Values.digger.startupProbe | toYaml | indent 10 | trim }}
+
+
         envFrom:
         - secretRef:
         {{- if not .Values.digger.secret.useExistingSecret }}

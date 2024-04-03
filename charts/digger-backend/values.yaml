@@ -10,6 +10,27 @@ digger:
     repository: registry.digger.dev/diggerhq/digger_backend
     tag: "v0.4.9"
 
+  # livenessProbe and startupProbe settings
+  # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+
+  # livenessProbe: configure probing of /health endpoint
+  # periodSeconds: how often to perform the probe (20 seconds)
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 3000
+    periodSeconds: 20
+
+  # startupProbe: configure probing of /health endpoint for startup
+  # failureThreshold: how many times the probe can fail before the container is considered failed (30 times)
+  # periodSeconds: how often to perform the probe (10 seconds)
+  startupProbe:
+    httpGet:
+      path: /health
+      port: 3000
+    failureThreshold: 30
+    periodSeconds: 10
+
   # service values
   # type: service type (ClusterIP, LoadBalancer, etc)
   # port: port number to expose
