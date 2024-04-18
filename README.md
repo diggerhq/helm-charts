@@ -37,7 +37,7 @@ Read more in this [blog](https://blog.digger.dev/how-we-are-designing-digger-to-
 
 The installation must be executed in two steps, as explaned in the [Digger official documentation](https://docs.digger.dev/self-host/deploy-docker-compose#create-github-app):
 
-1. Install the helm chart leaving empty all the data related to the GitHub App
+1. Install the `digger-backend` helm chart from https://diggerhq.github.io/helm-charts/, leaving empty all the data related to the GitHub App
 2. Go to `your_digger_hostname/github/setup` to install and configure the GitHub App
 3. Configure in the helm values or in the external secret all the data related to the new GitHub app and upgrade the helm installation to reload the Digger application with the new configuration
 
