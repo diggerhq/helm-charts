@@ -3,7 +3,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: {{ include "digger-backend.fullname" . }}-postgres
-  namespace: {{ .Values.namespace }}
 spec:
   serviceName: "{{ include "digger-backend.fullname" . }}-postgres"
   replicas: 1

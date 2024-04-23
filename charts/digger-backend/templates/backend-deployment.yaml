@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "digger-backend.fullname" . }}-web
-  namespace: {{ .Values.namespace }}
 spec:
   replicas: 1
   selector:
