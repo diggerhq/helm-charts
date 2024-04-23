@@ -45,7 +45,7 @@ The installation must be executed in two steps, as explaned in the [Digger offic
 
 To configure the Digger backend deployment with the Helm chart, you'll need to set several values in the `values.yaml` file. Below are the key configurations to consider:
 
-- `digger.image.repository`: The Docker image repository for the Digger backend (e.g., `ghcr.io/diggerhq/digger_backend`).
+- `digger.image.repository`: The Docker image repository for the Digger backend (e.g., `registry.digger.dev/diggerhq/digger_backend`).
 - `digger.image.tag`: The specific version tag of the Docker image to deploy (e.g., `"v0.4.2"`).
 
 - `digger.service.type`: The type of Kubernetes service to create, such as `ClusterIP`, `NodePort`, or `LoadBalancer`.
