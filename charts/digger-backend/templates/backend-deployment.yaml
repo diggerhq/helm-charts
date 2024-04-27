@@ -29,17 +29,21 @@ spec:
         - secretRef:
         {{- if not .Values.digger.secret.useExistingSecret }}
             name: {{ include "digger-backend.fullname" . }}-secret
+        {{- else if .Values.digger.postgres.existingSecretName }}
+            name: {{ .Values.digger.postgres.existingSecretName }}
         {{- else }}
             name: {{ .Values.digger.secret.existingSecretName }}       
         {{- end }}
         env:
         - name: HTTP_BASIC_AUTH
           value: "1"
+        {{- if not .Values.digger.postgres.existingSecretName }}
         - name: DATABASE_URL
         {{- if .Values.postgres.enabled }}
           value: "postgres://postgres:$(POSTGRES_PASSWORD)@{{ include "digger-backend.fullname" . }}-postgres:5432/postgres?sslmode=disable"
         {{- else }}
           value: "postgres://{{ .Values.digger.postgres.user }}:$(POSTGRES_PASSWORD)@{{ .Values.digger.postgres.host }}:{{ .Values.digger.postgres.port }}/{{ .Values.digger.postgres.database }}"
+        {{- end }}
         {{- end }}
         - name: ALLOW_DIRTY
           value: "{{ .Values.digger.postgres.allow_dirty }}"
