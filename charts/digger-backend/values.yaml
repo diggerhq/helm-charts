@@ -87,6 +87,12 @@ digger:
   # configure this section if you want to use an external postgres database
 
   postgres:
+    # if the DB connection string is already in a secret
+    # DB connection string should be in a key names DATABASE_URL
+    # compatible with https://github.com/kloeckner-i/db-operator, for example
+    existingSecretName: ""
+
+    # to define connection details in chart:
     user: ""
     database: ""
     host: ""
