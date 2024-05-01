@@ -29,10 +29,12 @@ spec:
         - secretRef:
         {{- if not .Values.digger.secret.useExistingSecret }}
             name: {{ include "digger-backend.fullname" . }}-secret
-        {{- else if .Values.digger.postgres.existingSecretName }}
-            name: {{ .Values.digger.postgres.existingSecretName }}
         {{- else }}
             name: {{ .Values.digger.secret.existingSecretName }}       
+        {{- end }}
+        {{- if .Values.digger.postgres.existingSecretName }}
+        - secretRef:
+            name: {{ .Values.digger.postgres.existingSecretName }}
         {{- end }}
         env:
         - name: HTTP_BASIC_AUTH
