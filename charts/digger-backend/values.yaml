@@ -1,7 +1,6 @@
 # values.yaml
 
 digger:
-
   # image values
   # repository: digger backend image repository
   # tag: digger backend image tag
@@ -45,16 +44,17 @@ digger:
   #   secretName: name of k8s secret for tls certs (default: "digger-backend-tls")
   ingress:
     enabled: true
-    #annotations:
-    #  kubernetes.io/ingress.class: nginx
+    className: "test"
+    annotations:
+      {}
+      # kubernetes.io/ingress.class: nginx
     #  kubernetes.io/tls-acme: 'true'
-    host: ""
+    host: "example.org"
     path: /
     tls:
       secretName: "digger-backend-tls"
 
-
-  # digger requires a secret with the following key-value pairs: 
+  # digger requires a secret with the following key-value pairs:
   # HTTP_BASIC_AUTH_USERNAME: <value>
   # HTTP_BASIC_AUTH_PASSWORD: <value>
   # BEARER_AUTH_TOKEN: <value>
@@ -71,8 +71,8 @@ digger:
     useExistingSecret: false
     existingSecretName: ""
 
-    httpBasicAuthUsername: ""
-    httpBasicAuthPassword: ""
+    httpBasicAuthUsername: "admin"
+    httpBasicAuthPassword: "admin"
     bearerAuthToken: "" # You should generate
     hostname: ""
     githubOrg: ""
@@ -81,8 +81,6 @@ digger:
     githubAppClientSecret: ""
     githubAppKeyFile: #base64 encoded file
     githubWebhookSecret: ""
-    postgresPassword: ""
-
 
   # configure this section if you want to use an external postgres database
 
@@ -90,26 +88,32 @@ digger:
     # if the DB connection string is already in a secret
     # DB connection string should be in a key names DATABASE_URL
     # compatible with https://github.com/kloeckner-i/db-operator, for example
-    existingSecretName: ""
+    existingSecretName: "new-pg-creds"
+    existingSecretKey: "postgres-password"
 
     # to define connection details in chart:
-    user: ""
-    database: ""
-    host: ""
-    port: ""
+    user: "postgres"
+    database: "digger"
+    host: "pg-postgresql.db"
+    password: "password"
+    port: "5432"
     allow_dirty: false # set to true if the database has already a schema
 
 # configure this section if you want to deploy a postgres db
 # WARNING: use only for test purposes, no persistency has been configured
 postgres:
-  enabled: false
-
-  # postgres requires a secret with the following key-value pairs: 
+  enabled: true
+  image: postgres
+  tag: "14"
+  resources:
+    limits: {}
+    requests: {}
+  # postgres requires a secret with the following key-value pairs:
   # postgres-password: <value>
 
   # pass the content in clear or specify the name of the existing secret
   secret:
-    useExistingSecret: false
-    existingSecretName: ""
+    useExistingSecret: true
+    existingSecretName: "new-pg-creds"
 
-    password: ""
+    password: "password"

@@ -14,17 +14,13 @@ spec:
     spec:
       containers:
       - name: web
-
         image: "{{ .Values.digger.image.repository }}:{{ .Values.digger.image.tag }}"
-        
         ports:
         - containerPort: 3000
-
         livenessProbe:
           {{ .Values.digger.livenessProbe | toYaml | indent 10 | trim }}
         startupProbe:
           {{ .Values.digger.startupProbe | toYaml | indent 10 | trim }}
-
         envFrom:
         - secretRef:
         {{- if not .Values.digger.secret.useExistingSecret }}
@@ -32,20 +28,32 @@ spec:
         {{- else }}
             name: {{ .Values.digger.secret.existingSecretName }}       
         {{- end }}
-        {{- if .Values.digger.postgres.existingSecretName }}
-        - secretRef:
-            name: {{ .Values.digger.postgres.existingSecretName }}
-        {{- end }}
         env:
+        - name: POSTGRES_PASSWORD          
+        {{- if  and .Values.postgres.enabled .Values.postgres.secret.useExistingSecret }}  
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.postgres.secret.existingSecretName }}
+              key: postgres-password
+        {{- else }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "digger-backend.fullname" . }}-postgres-secret
+              key: postgres-password
+        {{- end }}
+        {{-  if and  .Values.digger.postgres.existingSecretName (not .Values.postgres.enabled) }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.digger.postgres.existingSecretName }}
+              key: {{ .Values.digger.postgres.existingSecretKey }}
+        {{- end }}
         - name: HTTP_BASIC_AUTH
           value: "1"
-        {{- if not .Values.digger.postgres.existingSecretName }}
         - name: DATABASE_URL
         {{- if .Values.postgres.enabled }}
           value: "postgres://postgres:$(POSTGRES_PASSWORD)@{{ include "digger-backend.fullname" . }}-postgres:5432/postgres?sslmode=disable"
         {{- else }}
-          value: "postgres://{{ .Values.digger.postgres.user }}:$(POSTGRES_PASSWORD)@{{ .Values.digger.postgres.host }}:{{ .Values.digger.postgres.port }}/{{ .Values.digger.postgres.database }}"
-        {{- end }}
+          value: "postgres://{{ .Values.digger.postgres.user }}:$(POSTGRES_PASSWORD)@{{ .Values.digger.postgres.host }}:{{ .Values.digger.postgres.port }}/{{ .Values.digger.postgres.database }}?sslmode=disable"
         {{- end }}
         - name: ALLOW_DIRTY
           value: "{{ .Values.digger.postgres.allow_dirty }}"
