@@ -6,7 +6,7 @@ digger:
   # tag: digger backend image tag
   image:
     repository: registry.digger.dev/diggerhq/digger_backend
-    tag: "v0.4.9"
+    tag: "latest"
 
   # livenessProbe and startupProbe settings
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/

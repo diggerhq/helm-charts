@@ -16,20 +16,20 @@ Digger runs terraform natively in your CI. This is:
 - Scalable compute with jobs isolation
 - Role-based access control via OPA
 - Read more about differences with Atlantis in our blog post
-​
+  ​
+
 ## Compared to Terraform Cloud and other TACOs
 
 - Open source
 - No duplication of the CI/CD stack
 - Secrets not shared with a third party
-​
+  ​
+
 ## Support for other CI’s
 
 We are currently designing Digger to be Multi-CI, so that in addition to GitHub Actions, you can run Terraform/OpenTofu within other CI’s such as Gitlab CI, Azure DevOps, Bitbucket, TeamCity, Circle CI and Jenkins, while still having the option to orchestrate jobs using Digger’s Orchestrator Backend.
 
 Read more in this [blog](https://blog.digger.dev/how-we-are-designing-digger-to-support-multiple-ci-systems/), and please share your requirement on [Slack](https://bit.ly/diggercommunity) if you require support for other CI’s. Your feedback/insight would help us a lot as this feature is in active development.
-
-
 
 # Digger Backend Helm Chart
 
@@ -46,7 +46,7 @@ The installation must be executed in two steps, as explaned in the [Digger offic
 To configure the Digger backend deployment with the Helm chart, you'll need to set several values in the `values.yaml` file. Below are the key configurations to consider:
 
 - `digger.image.repository`: The Docker image repository for the Digger backend (e.g., `registry.digger.dev/diggerhq/digger_backend`).
-- `digger.image.tag`: The specific version tag of the Docker image to deploy (e.g., `"v0.4.2"`).
+- `digger.image.tag`: The specific version tag of the Docker image to deploy (e.g., `"v0.6.0"`).
 
 - `digger.service.type`: The type of Kubernetes service to create, such as `ClusterIP`, `NodePort`, or `LoadBalancer`.
 - `digger.service.port`: The port number that the service will expose (e.g., `3000`).

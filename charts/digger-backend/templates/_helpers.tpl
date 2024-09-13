@@ -36,9 +36,6 @@ Common labels
 {{- define "digger-backend.labels" -}}
 helm.sh/chart: {{ include "digger-backend.chart" . }}
 {{ include "digger-backend.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
