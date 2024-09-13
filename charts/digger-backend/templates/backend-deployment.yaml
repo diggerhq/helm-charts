@@ -35,6 +35,11 @@ spec:
             secretKeyRef:
               name: {{ .Values.postgres.secret.existingSecretName }}
               key: postgres-password
+        {{- else if .Values.digger.postgres.existingSecretName }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ .Values.digger.postgres.existingSecretName }}
+              key: {{ .Values.digger.postgres.existingSecretKey }}
         {{- else }}
           valueFrom:
             secretKeyRef:
@@ -51,9 +56,10 @@ spec:
           value: "1"
         - name: DATABASE_URL
         {{- if .Values.postgres.enabled }}
-          value: "postgres://postgres:$(POSTGRES_PASSWORD)@{{ include "digger-backend.fullname" . }}-postgres:5432/postgres?sslmode=disable"
+          value: postgres://postgres:$(POSTGRES_PASSWORD)@{{ include "digger-backend.fullname" . }}-postgres:5432/postgres?sslmode=disable
         {{- else }}
-          value: "postgres://{{ .Values.digger.postgres.user }}:$(POSTGRES_PASSWORD)@{{ .Values.digger.postgres.host }}:{{ .Values.digger.postgres.port }}/{{ .Values.digger.postgres.database }}?sslmode=disable"
+          {{- $pg := .Values.digger.postgres }}
+          value: "postgres://{{ $pg.user }}:$(POSTGRES_PASSWORD)@{{ $pg.host }}:{{ $pg.port }}/{{ $pg.database }}?sslmode=disable"
         {{- end }}
         - name: ALLOW_DIRTY
           value: "{{ .Values.digger.postgres.allow_dirty }}"

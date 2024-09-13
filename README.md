@@ -55,6 +55,7 @@ To configure the Digger backend deployment with the Helm chart, you'll need to s
 - `digger.annotations`: Add the needed annotations based on your ingress controller configuration.
 - `digger.ingress.host`: The hostname to use for the Ingress resource (e.g., `digger-backend.test`).
 - `digger.ingress.path`: The path for the Ingress resource (e.g., `/`).
+- `digger.ingress.className`: the classname to use for ingress (only considered for kuberetes >= 1.18)
 - `digger.ingress.tls.secretName`: The name of the TLS secret to use for Ingress encryption (e.g., `digger-backend-tls`).
 
 - `digger.secret.*`: Various secrets needed for the application, such as `HTTP_BASIC_AUTH_PASSWORD` and `BEARER_AUTH_TOKEN`. You can provide them directly or reference an existing Kubernetes secret by setting `useExistingSecret` to `true` and specifying `existingSecretName`.
