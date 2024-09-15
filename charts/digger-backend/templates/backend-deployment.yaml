@@ -46,12 +46,6 @@ spec:
               name: {{ include "digger-backend.fullname" . }}-postgres-secret
               key: postgres-password
         {{- end }}
-        {{-  if and  .Values.digger.postgres.existingSecretName (not .Values.postgres.enabled) }}
-          valueFrom:
-            secretKeyRef:
-              name: {{ .Values.digger.postgres.existingSecretName }}
-              key: {{ .Values.digger.postgres.existingSecretKey }}
-        {{- end }}
         - name: HTTP_BASIC_AUTH
           value: "1"
         - name: DATABASE_URL
