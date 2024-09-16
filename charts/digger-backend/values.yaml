@@ -6,7 +6,7 @@ digger:
   # tag: digger backend image tag
   image:
     repository: registry.digger.dev/diggerhq/digger_backend
-    tag: "v0.4.9"
+    tag: "v0.6.42"
 
   # livenessProbe and startupProbe settings
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
@@ -44,12 +44,12 @@ digger:
   #   secretName: name of k8s secret for tls certs (default: "digger-backend-tls")
   ingress:
     enabled: true
-    className: "test"
+    className: ""
     annotations:
       {}
       # kubernetes.io/ingress.class: nginx
     #  kubernetes.io/tls-acme: 'true'
-    host: "example.org"
+    host: ""
     path: /
     tls:
       secretName: "digger-backend-tls"
@@ -85,10 +85,8 @@ digger:
   # configure this section if you want to use an external postgres database
 
   postgres:
-    # if the DB connection string is already in a secret
-    # DB connection string should be in a key names DATABASE_URL
-    # compatible with https://github.com/kloeckner-i/db-operator, for example
-    existingSecretName: "new-pg-creds"
+    # specify the secret name and key to pull the existing postgres database password from
+    existingSecretName: ""
     existingSecretKey: "postgres-password"
 
     # to define connection details in chart:
@@ -102,7 +100,7 @@ digger:
 # configure this section if you want to deploy a postgres db
 # WARNING: use only for test purposes, no persistency has been configured
 postgres:
-  enabled: true
+  enabled: false
   image: postgres
   tag: "14"
   resources:
