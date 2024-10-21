@@ -6,7 +6,7 @@ digger:
   # tag: digger backend image tag
   image:
     repository: registry.digger.dev/diggerhq/digger_backend
-    tag: "v0.6.42"
+    tag: "v0.6.44"
 
   # livenessProbe and startupProbe settings
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
@@ -90,6 +90,7 @@ digger:
     existingSecretKey: "postgres-password"
 
     # to define connection details in chart:
+    sslmode: "disable"
     user: "postgres"
     database: "digger"
     host: "pg-postgresql.db"
@@ -100,6 +101,7 @@ digger:
 # configure this section if you want to deploy a postgres db
 # WARNING: use only for test purposes, no persistency has been configured
 postgres:
+  sslmode: "disable"
   enabled: false
   image: postgres
   tag: "14"
