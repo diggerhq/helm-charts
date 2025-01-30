@@ -12,6 +12,14 @@ spec:
       labels:
         app: {{ include "digger-backend.name" . }}-web
     spec:
+      {{- if $.Values.digger.nodeSelector }}
+      nodeSelector:
+        {{- toYaml $.Values.digger.nodeSelector | nindent 8 }}
+      {{- end }}
+      {{- if $.Values.digger.tolerations }}
+        tolerations:
+        {{- toYaml $.Values.digger.tolerations | nindent 8 }}
+      {{- end }}
       containers:
       - name: web
         image: "{{ .Values.digger.image.repository }}:{{ .Values.digger.image.tag }}"
