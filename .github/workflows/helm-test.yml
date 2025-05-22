@@ -1,0 +1,32 @@
+name: Helm Unit Tests
+
+on:
+  pull_request:
+    paths:
+      - 'charts/**'
+      - '.github/workflows/helm-test.yml'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: v3.12.3
+
+      - name: Install Helm unittest plugin
+        run: |
+          helm plugin install https://github.com/quintush/helm-unittest
+
+      - name: Run Helm unit tests
+        run: |
+          for chart in charts/*/; do
+            if [ -d "$chart" ]; then
+              echo "Testing chart: $chart"
+              helm unittest $chart
+            fi
+          done 

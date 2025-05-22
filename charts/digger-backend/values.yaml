@@ -8,6 +8,15 @@ digger:
     repository: registry.digger.dev/diggerhq/digger_backend
     tag: "v0.6.44"
 
+  # Custom environment variables to be added to the backend deployment
+  # Format:
+  # customEnv:
+  #   - name: MY_CUSTOM_ENV
+  #     value: "my-value"
+  #   - name: ANOTHER_ENV
+  #     value: "another-value"
+  customEnv: []
+
   # livenessProbe and startupProbe settings
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 

@@ -1,0 +1,16 @@
+# digger/tests/deployment_test.yaml
+suite: Test customEnv injection
+templates:
+  - templates/backend-deployment.yaml
+tests:
+  - it: should include customEnv environment variable
+    set:
+      digger.customEnv:
+          - name: TEST_ENV
+            value: test-value
+    asserts:
+      - contains:
+          path: spec.template.spec.containers[0].env
+          content:
+            name: TEST_ENV
+            value: test-value
