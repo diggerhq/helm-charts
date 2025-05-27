@@ -6,7 +6,7 @@ digger:
   # tag: digger backend image tag
   image:
     repository: registry.digger.dev/diggerhq/digger_backend
-    tag: "v0.6.44"
+    tag: "v0.6.101"
 
   # Custom environment variables to be added to the backend deployment
   # Format:
