@@ -17,6 +17,10 @@ digger:
   #     value: "another-value"
   customEnv: []
 
+  # Set the log level for the backend
+  # DEBUG will enable the debug logs, any other value will set it to INFO
+  logLevel: "INFO"
+
   # livenessProbe and startupProbe settings
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 

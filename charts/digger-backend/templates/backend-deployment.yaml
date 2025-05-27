@@ -34,11 +34,11 @@ spec:
         {{- if not .Values.digger.secret.useExistingSecret }}
             name: {{ include "digger-backend.fullname" . }}-secret
         {{- else }}
-            name: {{ .Values.digger.secret.existingSecretName }}       
+            name: {{ .Values.digger.secret.existingSecretName }}
         {{- end }}
         env:
-        - name: POSTGRES_PASSWORD          
-        {{- if  and .Values.postgres.enabled .Values.postgres.secret.useExistingSecret }}  
+        - name: POSTGRES_PASSWORD
+        {{- if  and .Values.postgres.enabled .Values.postgres.secret.useExistingSecret }}
           valueFrom:
             secretKeyRef:
               name: {{ .Values.postgres.secret.existingSecretName }}
@@ -65,6 +65,8 @@ spec:
         {{- end }}
         - name: ALLOW_DIRTY
           value: "{{ .Values.digger.postgres.allow_dirty }}"
+        - name: DIGGER_LOG_LEVEL
+          value: {{ .Values.digger.logLevel | quote }}
         {{- with .Values.digger.customEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
