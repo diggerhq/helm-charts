@@ -92,7 +92,7 @@ digger:
     githubAppID: ""
     githubAppClientID: ""
     githubAppClientSecret: ""
-    githubAppKeyFile: #base64 encoded file
+    githubAppKeyFile: "" #base64 encoded file
     githubWebhookSecret: ""
 
   # configure this section if you want to use an external postgres database
