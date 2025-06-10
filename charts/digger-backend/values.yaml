@@ -21,6 +21,15 @@ digger:
   # DEBUG will enable the debug logs, any other value will set it to INFO
   logLevel: "INFO"
 
+  # Resource limits and requests for the pods
+  resources: {}
+  #  requests:
+  #    cpu: 100m
+  #    memory: 140Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 200Mi
+
   # livenessProbe and startupProbe settings
   # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 
