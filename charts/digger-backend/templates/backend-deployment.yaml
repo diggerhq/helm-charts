@@ -36,6 +36,10 @@ spec:
         {{- else }}
             name: {{ .Values.digger.secret.existingSecretName }}
         {{- end }}
+        {{- with .Values.digger.resources }}
+        resources:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         env:
         - name: POSTGRES_PASSWORD
         {{- if  and .Values.postgres.enabled .Values.postgres.secret.useExistingSecret }}
