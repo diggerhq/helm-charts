@@ -1,3 +1,9 @@
+# Warning: moved
+
+This chart has now moved and is hosted in the main repo: https://github.com/diggerhq/digger/tree/develop/helm-charts if you would like to use or contribute, please refer to the documentation and pull the chart from the OCI image in the main repo
+
+------
+
 <img width="1470" alt="digger-opensource-gitops-banner" src="https://github.com/diggerhq/digger/assets/1280498/7fb44db3-38ca-4021-8714-87a2f1a14982">
 
 CI/CD for Terraform is [tricky](https://itnext.io/pains-in-terraform-collaboration-249a56b4534e). To make life easier, specialised CI systems aka [TACOS](https://itnext.io/spice-up-your-infrastructure-as-code-with-tacos-1a9c179e0783) exist - Terraform Cloud, Spacelift, Atlantis, etc.
